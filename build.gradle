@@ -1,0 +1,18 @@
+plugins {
+    id("java")
+}
+
+group = "fr.ortaria"
+version = "1.0"
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot:1.20.4-R0.1-SNAPSHOT'
+}
+
+compileJava.options.encoding = "UTF-8"
+setLibsDirName('../serveur/plugins')
