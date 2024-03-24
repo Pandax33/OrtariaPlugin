@@ -1,0 +1,21 @@
+CREATE TABLE joueurs (
+                         id INT AUTO_INCREMENT PRIMARY KEY,
+                         uuid VARCHAR(36) NOT NULL UNIQUE,
+                         pseudo VARCHAR(100) NOT NULL,
+                         date_first_connexion DATETIME DEFAULT CURRENT_TIMESTAMP,
+                         destin ENUM('Demon', 'Ange', 'Dieu', 'Monstre') NOT NULL,
+                         classe VARCHAR(50),
+                         guilde VARCHAR(50),
+                         niveau_aventure INT DEFAULT 0,
+                         argent DOUBLE DEFAULT 0.0,
+                         points_tdr INT DEFAULT 0,
+                         grade VARCHAR(50),
+                         niveau_alchimiste INT DEFAULT 0,
+                         niveau_arcaniste INT DEFAULT 0,
+                         niveau_archeologue INT DEFAULT 0,
+                         niveau_cuisinier INT DEFAULT 0,
+                         niveau_forgeron INT DEFAULT 0,
+                         niveau_pelleteur INT DEFAULT 0,
+                         niveau_bucheron INT DEFAULT 0,
+                         niveau_mineur INT DEFAULT 0
+);
