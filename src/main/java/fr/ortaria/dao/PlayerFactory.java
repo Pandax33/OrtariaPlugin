@@ -33,12 +33,12 @@ public class PlayerFactory {
     public Player createPlayer(String uuid, String pseudo, Timestamp dateFirstConnexion, String destin,
                                String classe, String guilde, int niveauAventure, double argent, int pointsTdr, String grade,
                                int niveauAlchimiste, int niveauArcaniste, int niveauArcheologue, int niveauCuisinier,
-                               int niveauForgeron, int niveauPelleteur, int niveauBucheron, int niveauMineur) {
+                               int niveauForgeron, int niveauPelleteur, int niveauBucheron, int niveauMineur, int faveur_astrale, int recharge_astrale, int vitesse, int PV, int force_joueur) {
         // Créer un nouveau joueur
         Player player = new Player(
                 uuid, pseudo, dateFirstConnexion, destin, classe, guilde, niveauAventure, argent,
                 pointsTdr, grade, niveauAlchimiste, niveauArcaniste, niveauArcheologue, niveauCuisinier,
-                niveauForgeron, niveauPelleteur, niveauBucheron, niveauMineur
+                niveauForgeron, niveauPelleteur, niveauBucheron, niveauMineur, faveur_astrale, recharge_astrale, vitesse, PV, force_joueur
         );
 
         // Insérer le joueur dans la base de données

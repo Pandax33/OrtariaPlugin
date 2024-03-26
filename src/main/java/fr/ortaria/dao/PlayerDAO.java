@@ -14,7 +14,7 @@ public class PlayerDAO {
     }
 
     public void insertPlayer(Player player) throws SQLException {
-        String sql = "INSERT INTO joueurs (uuid, pseudo, date_first_connexion, destin, classe, guilde, niveau_aventure, argent, points_tdr, grade, niveau_alchimiste, niveau_arcaniste, niveau_archeologue, niveau_cuisinier, niveau_forgeron, niveau_pelleteur, niveau_bucheron, niveau_mineur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO joueurs (uuid, pseudo, date_first_connexion, destin, classe, guilde, niveau_aventure, argent, points_tdr, grade, niveau_alchimiste, niveau_arcaniste, niveau_archeologue, niveau_cuisinier, niveau_forgeron, niveau_pelleteur, niveau_bucheron, niveau_mineur, faveur_astrale,recharge_astrale,vitesse,PV,force_joueur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, player.getUuid());
@@ -35,6 +35,11 @@ public class PlayerDAO {
             stmt.setInt(16, player.getNiveauPelleteur());
             stmt.setInt(17, player.getNiveauBucheron());
             stmt.setInt(18, player.getNiveauMineur());
+            stmt.setInt(19, player.getFaveur_astrale());
+            stmt.setInt(20, player.getRecharge_astrale());
+            stmt.setInt(21, player.getVitesse());
+            stmt.setInt(22, player.getPV());
+            stmt.setInt(23, player.getForce_joueur());
 
             int affectedRows = stmt.executeUpdate();
             if (affectedRows == 0) {
@@ -76,7 +81,12 @@ public class PlayerDAO {
                         resultSet.getInt("niveau_forgeron"),
                         resultSet.getInt("niveau_pelleteur"),
                         resultSet.getInt("niveau_bucheron"),
-                        resultSet.getInt("niveau_mineur")
+                        resultSet.getInt("niveau_mineur"),
+                        resultSet.getInt("faveur_astrale"),
+                        resultSet.getInt("recharge_astrale"),
+                        resultSet.getInt("vitesse"),
+                        resultSet.getInt("PV"),
+                        resultSet.getInt("force_joueur")
                 );
                 return player;
             } else {
@@ -86,7 +96,7 @@ public class PlayerDAO {
     }
 
     public void updatePlayer(Player player) throws SQLException {
-        String sql = "UPDATE joueurs SET pseudo = ?, destin = ?, classe = ?, guilde = ?, niveau_aventure = ?, argent = ?, points_tdr = ?, grade = ?, niveau_alchimiste = ?, niveau_arcaniste = ?, niveau_archeologue = ?, niveau_cuisinier = ?, niveau_forgeron = ?, niveau_pelleteur = ?, niveau_bucheron = ?, niveau_mineur = ? WHERE uuid = ?";
+        String sql = "UPDATE joueurs SET pseudo = ?, destin = ?, classe = ?, guilde = ?, niveau_aventure = ?, argent = ?, points_tdr = ?, grade = ?, niveau_alchimiste = ?, niveau_arcaniste = ?, niveau_archeologue = ?, niveau_cuisinier = ?, niveau_forgeron = ?, niveau_pelleteur = ?, niveau_bucheron = ?, niveau_mineur = ?,faveur_astrale = ?, recharge_astrale = ?,vitesse = ?, PV = ?, force_joueur = ? WHERE uuid = ?";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, player.getPseudo());
@@ -105,7 +115,12 @@ public class PlayerDAO {
             stmt.setInt(14, player.getNiveauPelleteur());
             stmt.setInt(15, player.getNiveauBucheron());
             stmt.setInt(16, player.getNiveauMineur());
-            stmt.setString(17, player.getUuid());
+            stmt.setInt(17, player.getFaveur_astrale());
+            stmt.setInt(18, player.getRecharge_astrale());
+            stmt.setInt(19, player.getVitesse());
+            stmt.setInt(20, player.getPV());
+            stmt.setInt(21, player.getForce_joueur());
+            stmt.setString(22, player.getUuid());
 
             int affectedRows = stmt.executeUpdate();
             if (affectedRows == 0) {
@@ -140,7 +155,12 @@ public class PlayerDAO {
                         rs.getInt("niveau_forgeron"),
                         rs.getInt("niveau_pelleteur"),
                         rs.getInt("niveau_bucheron"),
-                        rs.getInt("niveau_mineur")
+                        rs.getInt("niveau_mineur"),
+                        rs.getInt("faveur_astrale"),
+                        rs.getInt("recharge_astrale"),
+                        rs.getInt("vitesse"),
+                        rs.getInt("PV"),
+                        rs.getInt("force_joueur")
                 );
                 player.setId(rs.getInt("id")); // Assurez-vous d'avoir un setter pour id dans Player
                 players.add(player);
@@ -150,5 +170,5 @@ public class PlayerDAO {
         return players;
     }
 
-    // Ajoutez ici d'autres méthodes pour la gestion des joueurs si nécessaire
+
 }

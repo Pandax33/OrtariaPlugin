@@ -2,3 +2,17 @@ name: Ortaria
 version: 1.0
 api-version: 1.20
 main: fr.ortaria.Main
+
+commands:
+  summon:
+    description: Invoque un mob par son slug.
+    usage: /summon <slug>
+    permission: ortaria.summon
+  createBossTDRFEU1:
+    description: Crée un boss Zombie TDR FEU.
+    permission: ortaria.summon
+
+permissions:
+  ortaria.summon:
+    description: Permet d'invoquer des mobs.
+    default: op

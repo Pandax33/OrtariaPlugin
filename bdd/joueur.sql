@@ -17,5 +17,11 @@ CREATE TABLE joueurs (
                          niveau_forgeron INT DEFAULT 0,
                          niveau_pelleteur INT DEFAULT 0,
                          niveau_bucheron INT DEFAULT 0,
-                         niveau_mineur INT DEFAULT 0
+                         niveau_mineur INT DEFAULT 0,
+                         faveur_astrale int default 10,
+                         recharge_astrale int default 1,
+                         vitesse int default 0,
+                         PV int default 0,
+                         force_joueur int default 0
+
 );

@@ -20,9 +20,15 @@ public class Player {
     private int niveauPelleteur;
     private int niveauBucheron;
     private int niveauMineur;
+    private int faveur_astrale;
+    private int recharge_astrale;
+    private int vitesse;
+    private int PV;
+    private int force_joueur;
+
 
     // Constructeur
-    public Player(String uuid, String pseudo, Timestamp dateFirstConnexion, String destin, String classe, String guilde, int niveauAventure, double argent, int pointsTdr, String grade, int niveauAlchimiste, int niveauArcaniste, int niveauArcheologue, int niveauCuisinier, int niveauForgeron, int niveauPelleteur, int niveauBucheron, int niveauMineur) {
+    public Player(String uuid, String pseudo, Timestamp dateFirstConnexion, String destin, String classe, String guilde, int niveauAventure, double argent, int pointsTdr, String grade, int niveauAlchimiste, int niveauArcaniste, int niveauArcheologue, int niveauCuisinier, int niveauForgeron, int niveauPelleteur, int niveauBucheron, int niveauMineur, int faveur_astrale, int recharge_astrale, int vitesse, int PV, int force_joueur) {
         this.uuid = uuid;
         this.pseudo = pseudo;
         this.dateFirstConnexion = dateFirstConnexion;
@@ -41,6 +47,11 @@ public class Player {
         this.niveauPelleteur = niveauPelleteur;
         this.niveauBucheron = niveauBucheron;
         this.niveauMineur = niveauMineur;
+        this.faveur_astrale = faveur_astrale;
+        this.recharge_astrale = recharge_astrale;
+        this.vitesse = vitesse;
+        this.PV = PV;
+        this.force_joueur = force_joueur;
     }
 
     // Getters et Setters
@@ -194,6 +205,36 @@ public class Player {
 
     public void setNiveauMineur(int niveauMineur) {
         this.niveauMineur = niveauMineur;
+    }
+    public int getFaveur_astrale() {
+        return faveur_astrale;
+    }
+    public void setFaveur_astrale(int faveur_astrale) {
+        this.faveur_astrale = faveur_astrale;
+    }
+    public int getRecharge_astrale() {
+        return recharge_astrale;
+    }
+    public void setRecharge_astrale(int recharge_astrale) {
+        this.recharge_astrale = recharge_astrale;
+    }
+    public int getVitesse() {
+        return vitesse;
+    }
+    public void setVitesse(int vitesse) {
+        this.vitesse = vitesse;
+    }
+    public int getPV() {
+        return PV;
+    }
+    public void setPV(int PV) {
+        this.PV = PV;
+    }
+    public int getForce_joueur() {
+        return force_joueur;
+    }
+    public void setForce_joueur(int force_joueur) {
+        this.force_joueur = force_joueur;
     }
 }
 

@@ -1,5 +1,7 @@
 package fr.ortaria.controllers;
 
+import fr.ortaria.Database;
+import fr.ortaria.dao.PlayerDAO;
 import fr.ortaria.dao.PlayerFactory;
 import fr.ortaria.models.Player;
 import org.bukkit.event.EventHandler;
@@ -14,7 +16,6 @@ import java.util.Random;
 public class FirstJoin implements Listener {
 
     private PlayerFactory playerFactory;
-
     public FirstJoin(Connection connection) {
         try {
             this.playerFactory = PlayerFactory.getInstance(connection);
@@ -24,7 +25,7 @@ public class FirstJoin implements Listener {
     }
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onPlayerJoin(PlayerJoinEvent event) throws SQLException {
         // Obtenir les informations du joueur
         String uuid = event.getPlayer().getUniqueId().toString();
         String pseudo = event.getPlayer().getName();
@@ -48,11 +49,19 @@ public class FirstJoin implements Listener {
         int niveauPelleteur = 0;
         int niveauBucheron = 0;
         int niveauMineur = 0;
+        int faveur_astrale = 0;
+        int recharge_astrale = 0;
+        int vitesse = 0;
+        int PV = 0;
+        int force_joueur = 0;
 
         if (isNewPlayer(uuid)) {
-            Player player = playerFactory.createPlayer(uuid, pseudo, dateFirstConnexion, destin, classe, guilde, niveauAventure, argent, pointsTdr, grade, niveauAlchimiste, niveauArcaniste, niveauArcheologue, niveauCuisinier, niveauForgeron, niveauPelleteur, niveauBucheron, niveauMineur);
+            Player player = playerFactory.createPlayer(uuid, pseudo, dateFirstConnexion, destin, classe, guilde, niveauAventure, argent, pointsTdr, grade, niveauAlchimiste, niveauArcaniste, niveauArcheologue, niveauCuisinier, niveauForgeron, niveauPelleteur, niveauBucheron, niveauMineur, faveur_astrale, recharge_astrale, vitesse, PV, force_joueur);
 
             event.getPlayer().sendMessage("Bienvenue sur le serveur pour la première fois, " + pseudo + "!");
+        }else {
+            event.getPlayer().sendMessage("Bienvenue sur le serveur, " + pseudo + "!");
+
         }
     }
 
