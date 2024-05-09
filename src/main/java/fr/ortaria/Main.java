@@ -1,8 +1,7 @@
 package fr.ortaria;
 
-import com.sun.jna.NativeLibrary;
 import fr.ortaria.controllers.FirstJoin;
-import fr.ortaria.mobs.TDRFEU;
+import fr.ortaria.mobs.TDRFEU.TDRFEU;
 import org.bukkit.plugin.java.JavaPlugin;
 import fr.ortaria.dao.PlayerFactory;
 import fr.ortaria.commandes.MobCommand;

@@ -1,4 +1,4 @@
-package fr.ortaria.mobs;
+package fr.ortaria.mobs.TDRFEU;
 import fr.ortaria.Database;
 import fr.ortaria.dao.MobFactory;
 import org.bukkit.Bukkit;
@@ -53,10 +53,7 @@ public class TDRFEU implements CommandExecutor{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
-
-
+        
         sender.sendMessage("Boss TDR FEU 1 créé !");
         return true;
     }
