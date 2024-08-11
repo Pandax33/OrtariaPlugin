@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import fr.ortaria.helper.ItemSerialization;
-import net.minecraft.world.item.ItemStack;
 import org.bukkit.entity.EntityType;
 
 public class MobDAO {

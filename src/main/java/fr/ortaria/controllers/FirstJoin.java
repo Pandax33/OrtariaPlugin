@@ -1,9 +1,7 @@
 package fr.ortaria.controllers;
 
-import fr.ortaria.Database;
-import fr.ortaria.dao.PlayerDAO;
 import fr.ortaria.dao.PlayerFactory;
-import fr.ortaria.models.Player;
+import fr.ortaria.models.Player_Class;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -18,7 +16,7 @@ public class FirstJoin implements Listener {
     private PlayerFactory playerFactory;
     public FirstJoin(Connection connection) {
         try {
-            this.playerFactory = PlayerFactory.getInstance(connection);
+            this.playerFactory = PlayerFactory.getInstance();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -54,9 +52,11 @@ public class FirstJoin implements Listener {
         int vitesse = 0;
         int PV = 0;
         int force_joueur = 0;
+        int id_guilde = 0;
+        int rank_guilde = 0;
 
         if (isNewPlayer(uuid)) {
-            Player player = playerFactory.createPlayer(uuid, pseudo, dateFirstConnexion, destin, classe, guilde, niveauAventure, argent, pointsTdr, grade, niveauAlchimiste, niveauArcaniste, niveauArcheologue, niveauCuisinier, niveauForgeron, niveauPelleteur, niveauBucheron, niveauMineur, faveur_astrale, recharge_astrale, vitesse, PV, force_joueur);
+            Player_Class player = playerFactory.createPlayer(uuid, pseudo, dateFirstConnexion, destin, classe, guilde, niveauAventure, argent, pointsTdr, grade, niveauAlchimiste, niveauArcaniste, niveauArcheologue, niveauCuisinier, niveauForgeron, niveauPelleteur, niveauBucheron, niveauMineur, faveur_astrale, recharge_astrale, vitesse, PV, force_joueur, id_guilde, rank_guilde);
 
             event.getPlayer().sendMessage("Bienvenue sur le serveur pour la première fois, " + pseudo + "!");
         }else {

@@ -1,6 +1,6 @@
 package fr.ortaria.models;
 import java.sql.Timestamp;
-public class Player {
+public class Player_Class {
     private int id;
     private String uuid;
     private String pseudo;
@@ -25,10 +25,14 @@ public class Player {
     private int vitesse;
     private int PV;
     private int force_joueur;
+    private int id_guilde;
+    private int rank_guilde;
+    private boolean gChat;
+    private int invitation_guilde;
 
 
     // Constructeur
-    public Player(String uuid, String pseudo, Timestamp dateFirstConnexion, String destin, String classe, String guilde, int niveauAventure, double argent, int pointsTdr, String grade, int niveauAlchimiste, int niveauArcaniste, int niveauArcheologue, int niveauCuisinier, int niveauForgeron, int niveauPelleteur, int niveauBucheron, int niveauMineur, int faveur_astrale, int recharge_astrale, int vitesse, int PV, int force_joueur) {
+    public Player_Class(String uuid, String pseudo, Timestamp dateFirstConnexion, String destin, String classe, String guilde, int niveauAventure, double argent, int pointsTdr, String grade, int niveauAlchimiste, int niveauArcaniste, int niveauArcheologue, int niveauCuisinier, int niveauForgeron, int niveauPelleteur, int niveauBucheron, int niveauMineur, int faveur_astrale, int recharge_astrale, int vitesse, int PV, int force_joueur, int id_guilde,int rank_guilde) {
         this.uuid = uuid;
         this.pseudo = pseudo;
         this.dateFirstConnexion = dateFirstConnexion;
@@ -52,6 +56,9 @@ public class Player {
         this.vitesse = vitesse;
         this.PV = PV;
         this.force_joueur = force_joueur;
+        this.gChat = false;
+        this.id_guilde = id_guilde;
+        this.rank_guilde = rank_guilde;
     }
 
     // Getters et Setters
@@ -235,6 +242,30 @@ public class Player {
     }
     public void setForce_joueur(int force_joueur) {
         this.force_joueur = force_joueur;
+    }
+    public boolean getGChat() {
+        return gChat;
+    }
+    public void setGChat(boolean gChat) {
+        this.gChat = gChat;
+    }
+    public int getId_guilde() {
+        return id_guilde;
+    }
+    public void setId_guilde(int id_guilde) {
+        this.id_guilde = id_guilde;
+    }
+    public int getRank_guilde() {
+        return rank_guilde;
+    }
+    public void setRank_guilde(int rank_guilde) {
+        this.rank_guilde = rank_guilde;
+    }
+    public int getInvitation_guilde() {
+        return invitation_guilde;
+    }
+    public void setInvitation_guilde(int invitation_guilde) {
+        this.invitation_guilde = invitation_guilde;
     }
 }
 

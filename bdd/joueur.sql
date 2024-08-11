@@ -25,3 +25,7 @@ CREATE TABLE joueurs (
                          force_joueur int default 0
 
 );
+ALTER TABLE joueurs
+    ADD COLUMN id_guilde INT DEFAULT NULL,
+    ADD COLUMN rank_guilde INT DEFAULT NULL,
+ADD CONSTRAINT fk_guilde_id FOREIGN KEY (id_guilde) REFERENCES guildes(id);

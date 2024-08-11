@@ -4,7 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.ortaria.models.Player;
+import fr.ortaria.models.Player_Class;
+
 public class PlayerDAO {
 
     private final Connection connection;
@@ -13,7 +14,7 @@ public class PlayerDAO {
         this.connection = connection;
     }
 
-    public void insertPlayer(Player player) throws SQLException {
+    public void insertPlayer(Player_Class player) throws SQLException {
         String sql = "INSERT INTO joueurs (uuid, pseudo, date_first_connexion, destin, classe, guilde, niveau_aventure, argent, points_tdr, grade, niveau_alchimiste, niveau_arcaniste, niveau_archeologue, niveau_cuisinier, niveau_forgeron, niveau_pelleteur, niveau_bucheron, niveau_mineur, faveur_astrale,recharge_astrale,vitesse,PV,force_joueur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -56,14 +57,14 @@ public class PlayerDAO {
         }
     }
 
-    public Player getPlayer(String uuid) throws SQLException {
+    public Player_Class getPlayer(String uuid) throws SQLException {
         String sql = "SELECT * FROM joueurs WHERE uuid = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, uuid);
 
             ResultSet resultSet = stmt.executeQuery();
             if (resultSet.next()) {
-                Player player = new Player(
+                Player_Class player = new Player_Class(
                         resultSet.getString("uuid"),
                         resultSet.getString("pseudo"),
                         resultSet.getTimestamp("date_first_connexion"),
@@ -86,7 +87,9 @@ public class PlayerDAO {
                         resultSet.getInt("recharge_astrale"),
                         resultSet.getInt("vitesse"),
                         resultSet.getInt("PV"),
-                        resultSet.getInt("force_joueur")
+                        resultSet.getInt("force_joueur"),
+                        resultSet.getInt("id_guilde"),
+                        resultSet.getInt("rank_guilde")
                 );
                 return player;
             } else {
@@ -95,49 +98,15 @@ public class PlayerDAO {
         }
     }
 
-    public void updatePlayer(Player player) throws SQLException {
-        String sql = "UPDATE joueurs SET pseudo = ?, destin = ?, classe = ?, guilde = ?, niveau_aventure = ?, argent = ?, points_tdr = ?, grade = ?, niveau_alchimiste = ?, niveau_arcaniste = ?, niveau_archeologue = ?, niveau_cuisinier = ?, niveau_forgeron = ?, niveau_pelleteur = ?, niveau_bucheron = ?, niveau_mineur = ?,faveur_astrale = ?, recharge_astrale = ?,vitesse = ?, PV = ?, force_joueur = ? WHERE uuid = ?";
-
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, player.getPseudo());
-            stmt.setString(2, player.getDestin());
-            stmt.setString(3, player.getClasse());
-            stmt.setString(4, player.getGuilde());
-            stmt.setInt(5, player.getNiveauAventure());
-            stmt.setDouble(6, player.getArgent());
-            stmt.setInt(7, player.getPointsTdr());
-            stmt.setString(8, player.getGrade());
-            stmt.setInt(9, player.getNiveauAlchimiste());
-            stmt.setInt(10, player.getNiveauArcaniste());
-            stmt.setInt(11, player.getNiveauArcheologue());
-            stmt.setInt(12, player.getNiveauCuisinier());
-            stmt.setInt(13, player.getNiveauForgeron());
-            stmt.setInt(14, player.getNiveauPelleteur());
-            stmt.setInt(15, player.getNiveauBucheron());
-            stmt.setInt(16, player.getNiveauMineur());
-            stmt.setInt(17, player.getFaveur_astrale());
-            stmt.setInt(18, player.getRecharge_astrale());
-            stmt.setInt(19, player.getVitesse());
-            stmt.setInt(20, player.getPV());
-            stmt.setInt(21, player.getForce_joueur());
-            stmt.setString(22, player.getUuid());
-
-            int affectedRows = stmt.executeUpdate();
-            if (affectedRows == 0) {
-                throw new SQLException("Updating player failed, no rows affected.");
-            }
-        }
-    }
-
-    public List<Player> getAllPlayers() throws SQLException {
-        List<Player> players = new ArrayList<>();
+    public List<Player_Class> getAllPlayers() throws SQLException {
+        List<Player_Class> players = new ArrayList<>();
         String sql = "SELECT * FROM joueurs";
 
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                Player player = new Player(
+                Player_Class player = new Player_Class(
                         rs.getString("uuid"),
                         rs.getString("pseudo"),
                         rs.getTimestamp("date_first_connexion"),
@@ -160,7 +129,10 @@ public class PlayerDAO {
                         rs.getInt("recharge_astrale"),
                         rs.getInt("vitesse"),
                         rs.getInt("PV"),
-                        rs.getInt("force_joueur")
+                        rs.getInt("force_joueur"),
+                        rs.getInt("id_guilde"),
+                        rs.getInt("rank_guilde")
+
                 );
                 player.setId(rs.getInt("id")); // Assurez-vous d'avoir un setter pour id dans Player
                 players.add(player);
@@ -168,6 +140,67 @@ public class PlayerDAO {
         }
 
         return players;
+    }
+
+    public void updatePlayer(Player_Class player) throws SQLException {
+        String sql = "UPDATE joueurs SET " +
+                "pseudo = ?, " +
+                "destin = ?, " +
+                "classe = ?, " +
+                "guilde = ?, " +
+                "niveau_aventure = ?, " +
+                "argent = ?, " +
+                "points_tdr = ?, " +
+                "grade = ?, " +
+                "niveau_alchimiste = ?, " +
+                "niveau_arcaniste = ?, " +
+                "niveau_archeologue = ?, " +
+                "niveau_cuisinier = ?, " +
+                "niveau_forgeron = ?, " +
+                "niveau_pelleteur = ?, " +
+                "niveau_bucheron = ?, " +
+                "niveau_mineur = ?, " +
+                "faveur_astrale = ?, " +
+                "recharge_astrale = ?, " +
+                "vitesse = ?, " +
+                "PV = ?, " +
+                "force_joueur = ?, " +
+                "id_guilde = ?, " +
+                "rank_guilde = ? " +
+                "WHERE uuid = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, player.getPseudo());
+            stmt.setString(2, player.getDestin());
+            stmt.setString(3, player.getClasse());
+            stmt.setString(4, player.getGuilde());
+            stmt.setInt(5, player.getNiveauAventure());
+            stmt.setDouble(6, player.getArgent());
+            stmt.setInt(7, player.getPointsTdr());
+            stmt.setString(8, player.getGrade());
+            stmt.setInt(9, player.getNiveauAlchimiste());
+            stmt.setInt(10, player.getNiveauArcaniste());
+            stmt.setInt(11, player.getNiveauArcheologue());
+            stmt.setInt(12, player.getNiveauCuisinier());
+            stmt.setInt(13, player.getNiveauForgeron());
+            stmt.setInt(14, player.getNiveauPelleteur());
+            stmt.setInt(15, player.getNiveauBucheron());
+            stmt.setInt(16, player.getNiveauMineur());
+            stmt.setInt(17, player.getFaveur_astrale());
+            stmt.setInt(18, player.getRecharge_astrale());
+            stmt.setInt(19, player.getVitesse());
+            stmt.setInt(20, player.getPV());
+            stmt.setInt(21, player.getForce_joueur());
+            stmt.setInt(22, player.getId_guilde());
+            stmt.setInt(23, player.getRank_guilde());
+            stmt.setString(24, player.getUuid());
+            stmt.executeUpdate();
+        }
+    }
+
+    public void updateAllPlayers(List<Player_Class> players) throws SQLException {
+        for (Player_Class player : players) {
+            updatePlayer(player);
+        }
     }
 
 

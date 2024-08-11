@@ -11,8 +11,90 @@ commands:
   createBossTDRFEU1:
     description: Crée un boss Zombie TDR FEU.
     permission: ortaria.summon
+  guilde:
+    description: Gère les commandes de la guilde.
+    usage: /guilde <command> [options]
+    permission: ortaria.guilde.manage
+  gchat:
+    description: Active ou désactive le chat de guilde.
+    usage: /gchat
+    permission: ortaria.guilde.chat
+  setdestin:
+    description: Définit le destin du joueur.
+    usage: /setdestin <joueur> <destin>
+    permission: ortaria.setdestin
+  setargent:
+    description: Définit l'argent du joueur.
+    usage: /setargent <joueur> <montant>
+    permission: ortaria.setargent
+  setgrade:
+    description: Définit le grade du joueur.
+    usage: /setgrade <joueur> <grade>
+    permission: ortaria.setgrade
+  setniveauaventure:
+    description: Définit le niveau d'aventure du joueur.
+    usage: /setniveauaventure <joueur> <niveau>
+    permission: ortaria.setniveauaventure
+  setpointstdr:
+    description: Définit les points TDR du joueur.
+    usage: /setpointstdr <joueur> <points>
+    permission: ortaria.setpointstdr
+  setlevel:
+    description: Définit le niveau de spécialisation d'un joueur.
+    usage: /setlevel <joueur> <specialisation> <niveau>
+    permission: ortaria.setlevel
+  show:
+    description: Affiche les valeurs des attributs d'un joueur.
+    usage: /show <joueur> <attribut>
+    permission: ortaria.show
+  money:
+    description: Manage player money
+    usage: /money <show|give> [player] [amount]
+    permission: ortaria.money
+  caca:
+    description: Fait caca.
+    usage: /caca
+    permission: ortaria.caca
+  menu:
+    usage: /menu [player]
+    description: Opens the player stats menu
+    permission: ortaria.menu
+
 
 permissions:
   ortaria.summon:
     description: Permet d'invoquer des mobs.
     default: op
+  ortaria.guilde.manage:
+    description: Permet la gestion des guildes.
+    default: true  # Change cette valeur à true pour permettre à tous de gérer les guildes
+  ortaria.guilde.chat:
+    description: Permet d'utiliser le chat de la guilde.
+    default: true  # Garde cette valeur à true pour que tous puissent utiliser le chat de guilde
+  ortaria.setdestin:
+    description: Permet de définir le destin d'un joueur.
+    default: op
+  ortaria.setargent:
+    description: Permet de définir l'argent d'un joueur.
+    default: op
+  ortaria.setgrade:
+    description: Permet de définir le grade d'un joueur.
+    default: op
+  ortaria.setniveauaventure:
+    description: Permet de définir le niveau d'aventure d'un joueur.
+    default: op
+  ortaria.setpointstdr:
+    description: Permet de définir les points TDR d'un joueur.
+    default: op
+  ortaria.setlevel:
+    description: Permet de définir le niveau de spécialisation d'un joueur dans différents métiers.
+    default: op
+  ortaria.show:
+    description: Permet d'afficher les attributs d'un joueur.
+    default: op
+  ortaria.money:
+    description: Manage player money
+    default: true
+  ortaria.menu:
+      description: Opens the player stats menu
+      default: true
