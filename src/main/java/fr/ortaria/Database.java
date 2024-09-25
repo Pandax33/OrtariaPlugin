@@ -17,9 +17,9 @@ public class Database {
             synchronized (Database.class) {
                 // Double vérification pour éviter d'ouvrir plusieurs connexions dans un contexte multithread
                 if (connection == null) {
-                    String url = "jdbc:mysql://localhost:3306/ortaria";
-                    String user = "root";
-                    String password = ""; // Assurez-vous que votre mot de passe est correct (vide par défaut avec WAMP)
+                    String url = "jdbc:mysql://192.168.86.40:3306/ortaria";
+                    String user = "leandro";
+                    String password = "dev"; // Assurez-vous que votre mot de passe est correct (vide par défaut avec WAMP)
 
                     // Assurez-vous d'avoir le driver JDBC MySQL dans votre classpath
                     Class.forName("com.mysql.cj.jdbc.Driver");

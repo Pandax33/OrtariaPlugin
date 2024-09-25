@@ -1,5 +1,5 @@
 plugins {
-    id("java")
+    id 'java'
 }
 
 group = "fr.ortaria"
@@ -24,5 +24,11 @@ dependencies {
     compileOnly("com.arcaniax:HeadDatabase-API:1.3.2")
 }
 
-compileJava.options.encoding = "UTF-8"
-setLibsDirName('../serveur/plugins')
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+jar {
+    archiveFileName = 'OrtariaPlugin.jar'
+    destinationDirectory = file('/home/leandro/OrtariaPlugin/serveur/plugins')
+}
